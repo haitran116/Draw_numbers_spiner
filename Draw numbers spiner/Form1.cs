@@ -205,11 +205,11 @@ namespace Draw_numbers_spiner
 
             Random random = new Random();
 
-            list_number_roll.Add(random.Next(0, 9));
-            list_number_roll.Add(random.Next(0, 9));
-            list_number_roll.Add(random.Next(0, 9));
-            list_number_roll.Add(random.Next(0, 9));
-            list_number_roll.Add(random.Next(0, 9));
+            list_number_roll.Add(random.Next(0, 10));
+            list_number_roll.Add(random.Next(0, 10));
+            list_number_roll.Add(random.Next(0, 10));
+            list_number_roll.Add(random.Next(0, 10));
+            list_number_roll.Add(random.Next(0, 10));
         }
 
         private void btn_quay_Click(object sender, EventArgs e)
