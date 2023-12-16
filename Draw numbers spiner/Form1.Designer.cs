@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             timer_playing = new System.Windows.Forms.Timer(components);
             btn_chot = new Button();
             btn_quay = new Button();
@@ -47,7 +46,7 @@
             btn_chot.BackColor = Color.BlueViolet;
             btn_chot.Font = new Font("UTM HelvetIns", 18F, FontStyle.Regular, GraphicsUnit.Point);
             btn_chot.ForeColor = SystemColors.ButtonFace;
-            btn_chot.Location = new Point(563, 605);
+            btn_chot.Location = new Point(599, 653);
             btn_chot.Name = "btn_chot";
             btn_chot.Size = new Size(141, 64);
             btn_chot.TabIndex = 0;
@@ -60,7 +59,7 @@
             btn_quay.BackColor = Color.Red;
             btn_quay.Font = new Font("UTM HelvetIns", 18F, FontStyle.Regular, GraphicsUnit.Point);
             btn_quay.ForeColor = SystemColors.ButtonFace;
-            btn_quay.Location = new Point(416, 605);
+            btn_quay.Location = new Point(452, 653);
             btn_quay.Name = "btn_quay";
             btn_quay.Size = new Size(141, 64);
             btn_quay.TabIndex = 1;
@@ -73,7 +72,7 @@
             btn_quaytiep.BackColor = Color.Gold;
             btn_quaytiep.Font = new Font("UTM HelvetIns", 18F, FontStyle.Regular, GraphicsUnit.Point);
             btn_quaytiep.ForeColor = SystemColors.ActiveCaptionText;
-            btn_quaytiep.Location = new Point(710, 605);
+            btn_quaytiep.Location = new Point(746, 653);
             btn_quaytiep.Name = "btn_quaytiep";
             btn_quaytiep.Size = new Size(141, 64);
             btn_quaytiep.TabIndex = 2;
@@ -89,9 +88,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1264, 681);
+            ClientSize = new Size(1350, 729);
             Controls.Add(btn_quaytiep);
             Controls.Add(btn_quay);
             Controls.Add(btn_chot);

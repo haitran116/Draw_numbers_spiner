@@ -12,8 +12,10 @@ namespace Draw_numbers_spiner
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.DarkMagenta;
             this.DoubleBuffered = true;
+
+            this.BackgroundImage = new Bitmap(@"images/back.png");
+            //this.BackgroundImageLayout = ImageLayout.Stretch;
 
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
@@ -36,17 +38,9 @@ namespace Draw_numbers_spiner
 
         Boolean check_roll_stop = false;
 
-        int n1, n2, n3, n4;
-
-        int x, y;
-
         int check_show_final = 0;
 
         List<int> list_number_roll = new List<int>();
-
-        Boolean check_wait_roll = false;
-        Boolean check_rolling = false;
-        Boolean check_roll_final = false;
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -55,7 +49,7 @@ namespace Draw_numbers_spiner
                 int px = 0;
                 foreach (Numbers number in list_number.ToList())
                 {
-                    e.Graphics.DrawImage(number.number, 235 + (162 * px), 100, number.number.Width, number.number.Height);
+                    e.Graphics.DrawImage(number.number, 278 + (162 * px), 100, number.number.Width, number.number.Height);
 
                     px++;
                 }
@@ -63,7 +57,7 @@ namespace Draw_numbers_spiner
                 Debug.WriteLine("Vẽ số");
             }
 
-            if(fireworks_list != null)
+            if (fireworks_list != null)
             {
                 foreach (Firework newFirework in fireworks_list.ToList())
                 {
@@ -137,7 +131,7 @@ namespace Draw_numbers_spiner
                     check_on_sound_firework = true;
                 }
 
-                if (check_on_sound_firework ==  true)
+                if (check_on_sound_firework == true)
                 {
                     sound_firework.PlayLooping();
 
@@ -235,7 +229,7 @@ namespace Draw_numbers_spiner
             check_roll_stop = false;
 
             timer_fireworks.Stop();
-            sound_firework.Stop(); 
+            sound_firework.Stop();
         }
 
         private void timer_fireworks_Tick(object sender, EventArgs e)
@@ -244,7 +238,7 @@ namespace Draw_numbers_spiner
             Firework newFirework = new Firework();
             newFirework.position.X = random.Next(0, 1280) - (newFirework.width / 2);
             newFirework.position.Y = random.Next(0, 1280) - (newFirework.height / 2);
-            fireworks_list.Add(newFirework);          
+            fireworks_list.Add(newFirework);
 
         }
     }
