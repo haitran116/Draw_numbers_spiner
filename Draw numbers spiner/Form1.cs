@@ -166,7 +166,7 @@ namespace Draw_numbers_spiner
                 Random random = new Random();
 
                 number.random_vecter = random.Next(0, 2);
-                number.speed = number.speed = random.Next(4, 1212);
+                number.speed = random.Next(4, 1212);
 
                 int dk = 0;
 
