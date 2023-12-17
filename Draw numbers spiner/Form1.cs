@@ -1,5 +1,4 @@
-﻿using NAudio.Wave;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Media;
 
@@ -20,34 +19,38 @@ namespace Draw_numbers_spiner
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
 
-            creats_number_spiner();
 
             timer_playing.Start();
-
         }
+        //-- hiệu ứng âm thanh --
+        SoundPlayer sound_firework = new SoundPlayer("sound/fw.wav");
+        SoundPlayer sound_quay = new SoundPlayer("sound/quay.wav");
+        SoundPlayer sound_chot = new SoundPlayer("sound/chot.wav");
 
-        List<Numbers> list_number = new List<Numbers>();
 
+        //-- biến toàn cục --
+        List<Numbers> list_numbers = new List<Numbers>();
         List<Firework> fireworks_list = new List<Firework>();
 
-        SoundPlayer sound_firework = new SoundPlayer("sound/fw.wav");
+        Boolean check_on_sound_firework = false;
 
-        string roll_number = "";
+        Boolean check_open_game = true;
 
-        Boolean check_wait = true;
+        Boolean click_quay = false;
+        Boolean click_chot = false;
+        Boolean click_tiep = false;
 
-        Boolean check_roll_stop = false;
-
-        int check_show_final = 0;
+        int quay_giai_nao = 0;
 
         List<int> list_number_roll = new List<int>();
 
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (list_number != null)
+            if (list_numbers != null)
             {
                 int px = 0;
-                foreach (Numbers number in list_number.ToList())
+                foreach (Numbers number in list_numbers.ToList())
                 {
                     e.Graphics.DrawImage(number.number, 278 + (162 * px), 100, number.number.Width, number.number.Height);
 
@@ -70,96 +73,50 @@ namespace Draw_numbers_spiner
             }
         }
 
-        Boolean check_on_sound_firework = false;
         private void timer_playing_Tick(object sender, EventArgs e)
         {
-            //roll wait
-            if (list_number != null && check_wait == true && check_roll_stop == false)
+            if (check_open_game == true)
             {
-                foreach (Numbers number in list_number.ToList())
+                if (list_numbers.Count == 0)
                 {
-                    number.animation_number();
-                }
-            }
-
-            // roll fast
-            if (list_number != null && check_wait == false && check_roll_stop == false)
-            {
-                foreach (Numbers number in list_number.ToList())
-                {
-                    number.speed = 64;
-                    number.animation_number();
-                }
-            }
-
-            //roll slowly
-            if (check_roll_stop == true && check_show_final < list_number.Count)
-            {
-                int index_ = 0;
-
-                foreach (Numbers number in list_number.ToList())
-                {
-                    int n = list_number_roll[index_];
-                    number.animation_number_slowly(n);
-                    index_++;
-                }
-            }
-
-            // kiểm tra xem đã vẽ đủ số kết quả chưa
-            check_show_final = 0;
-            foreach (Numbers number in list_number.ToList())
-            {
-                if (number.check_final == true)
-                {
-                    check_show_final++;
-                }
-            }
-
-            // nếu chưa vẽ đủ số kết quả thì vẽ cho đến khi nào xong
-            if (check_show_final < list_number.Count)
-            {
-                this.Invalidate();
-            }
-
-            // nhi trả kết quả ra thì bắt pháo hoa
-            if (check_show_final == list_number.Count)
-            {
-                if (!timer_fireworks.Enabled)
-                {
-                    timer_fireworks.Start();
-
-                    check_on_sound_firework = true;
+                    list_numbers = creats_number_spiner();
                 }
 
-                if (check_on_sound_firework == true)
-                {
-                    sound_firework.PlayLooping();
-
-                    check_on_sound_firework = false;
-                }
+                roll_wait(list_numbers);          
             }
 
-            // firework ----
-            if (fireworks_list != null)
+            if (click_quay == true)
             {
-                foreach (Firework firework in fireworks_list.ToList())
-                {
-
-                    if (firework.animationComplete == false)
-                    {
-                        firework.AnimateFireWork();
-                    }
-                    else
-                    {
-                        fireworks_list.Remove(firework);
-                    }
-                }
+                roll_fast(list_numbers);
             }
-            this.Invalidate();
+
+            if (click_chot == true)
+            {
+                roll_slowly(list_numbers);
+                set_firework();
+            }
+
+            if (click_tiep == true)
+            {
+                if(list_numbers.Count == 0)
+                {
+                    list_numbers = creats_number_spiner();
+                }
+                roll_wait(list_numbers);
+            }
+
+            // giải nhất
+            if (quay_giai_nao == 1)
+            {
+                
+            }
+
         }
 
-        private void creats_number_spiner()
+        // hàm tạo list đối tượng số
+        List<Numbers> creats_number_spiner()
         {
+            List<Numbers> list_number = new List<Numbers>();
             for (int i = 0; i < 5; i++)
             {
                 Numbers number = new Numbers();
@@ -187,12 +144,129 @@ namespace Draw_numbers_spiner
                 }
                 list_number.Add(number);
             }
+            return list_number;
+        }
+
+        // hàm quay chậm lúc chờ
+        private void roll_wait(List<Numbers> list_number)
+        {
+            //roll wait
+            if (list_number != null)
+            {
+                foreach (Numbers number in list_number.ToList())
+                {
+                    number.animation_number();
+                }
+            }
+            this.Invalidate();
+        }
+
+        // hàm quay số nhanh
+        private void roll_fast(List<Numbers> list_number)
+        {
+            // roll fast
+            if (list_number != null)
+            {
+                foreach (Numbers number in list_number.ToList())
+                {
+                    // set tốc độ lên 
+                    number.speed = 64;
+                    number.animation_number();
+                }
+            }
+            this.Invalidate();
+        }
+
+        // hàm quay chậm dần rồi trả kết quả
+        private void roll_slowly(List<Numbers> list_number)
+        {
+            int check_show_final = 0;
+            //roll slowly
+            if (check_show_final < list_number.Count)
+            {
+                int index_ = 0;
+
+                foreach (Numbers number in list_number.ToList())
+                {
+                    // truyền từng tham số kết quả vòng quay
+                    int n = list_number_roll[index_];
+                    number.animation_number_slowly(n);
+                    index_++;
+
+                    // nếu 1 vòng số trả xong kết quả thì cộng check lên 1 khi nào đủ tức là trả xong hết kết quả
+                    if (number.check_final == true)
+                    {
+                        check_show_final++;
+                    }
+                }
+
+                // nhi trả kết quả ra thì bắt pháo hoa
+                if (check_show_final == list_number.Count)
+                {
+                    if (!timer_fireworks.Enabled)
+                    {
+                        timer_fireworks.Start();
+
+                        check_on_sound_firework = true;
+                    }
+
+                    if (check_on_sound_firework == true)
+                    {
+                        sound_firework.PlayLooping();
+
+                        check_on_sound_firework = false;
+                    }
+                }
+
+                this.Invalidate();
+            }
+        }
+
+        // hàm setup pháo hoa
+        private void set_firework()
+        {
+            // firework ----
+            if (fireworks_list != null)
+            {
+                foreach (Firework firework in fireworks_list.ToList())
+                {
+
+                    if (firework.animationComplete == false)
+                    {
+                        firework.AnimateFireWork();
+                    }
+                    else
+                    {
+                        fireworks_list.Remove(firework);
+                    }
+                }
+                
+                this.Invalidate();
+            }
+        }
+
+        private void btn_quay_Click(object sender, EventArgs e)
+        {
+            click_quay = true;
+            click_tiep = false;
+            click_chot = false;
+            check_open_game = false;
+
+
+            btn_chot.Enabled = true;
+            btn_quaytiep.Enabled = false;
+
+            list_number_roll.Clear();
+
+            sound_quay.PlayLooping();
         }
 
         private void btn_chot_Click(object sender, EventArgs e)
         {
-            check_wait = false;
-            check_roll_stop = true;
+            click_chot = true;
+            click_tiep = false;
+            click_quay = false;
+            check_open_game = false;
 
             btn_quay.Enabled = false;
             btn_quaytiep.Enabled = true;
@@ -204,29 +278,26 @@ namespace Draw_numbers_spiner
             list_number_roll.Add(random.Next(0, 10));
             list_number_roll.Add(random.Next(0, 10));
             list_number_roll.Add(random.Next(0, 10));
+
+            sound_quay.Stop();
+            sound_chot.Play();
         }
 
-        private void btn_quay_Click(object sender, EventArgs e)
-        {
-            list_number_roll.Clear();
-
-            btn_chot.Enabled = true;
-            btn_quaytiep.Enabled = false;
-
-            check_roll_stop = false;
-            check_wait = false;
-        }
 
         private void btn_quaytiep_Click(object sender, EventArgs e)
         {
-            list_number.Clear();
-            creats_number_spiner();
+            click_tiep = true;
+            click_quay = false;
+            click_chot = false;
+            check_open_game = false;
+
 
             btn_quay.Enabled = true;
             btn_chot.Enabled = false;
 
-            check_wait = true;
-            check_roll_stop = false;
+            list_numbers.Clear();
+
+            fireworks_list.Clear();
 
             timer_fireworks.Stop();
             sound_firework.Stop();
@@ -236,8 +307,8 @@ namespace Draw_numbers_spiner
         {
             Random random = new Random();
             Firework newFirework = new Firework();
-            newFirework.position.X = random.Next(0, 1280) - (newFirework.width / 2);
-            newFirework.position.Y = random.Next(0, 1280) - (newFirework.height / 2);
+            newFirework.position.X = random.Next(0, 1366) - (newFirework.width / 2);
+            newFirework.position.Y = random.Next(0, 1366) - (newFirework.height / 2);
             fireworks_list.Add(newFirework);
 
         }

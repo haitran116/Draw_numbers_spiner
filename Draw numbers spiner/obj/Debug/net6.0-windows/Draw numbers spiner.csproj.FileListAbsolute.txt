@@ -52,14 +52,6 @@ E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\Draw numbers
 E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\Draw numbers spiner.runtimeconfig.json
 E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\Draw numbers spiner.dll
 E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\Draw numbers spiner.pdb
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.dll
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.Asio.dll
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.Core.dll
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.Midi.dll
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.Wasapi.dll
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.WinForms.dll
-E:\Draw numbers spiner\Draw numbers spiner\bin\Debug\net6.0-windows\NAudio.WinMM.dll
-E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.csproj.AssemblyReference.cache
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw_numbers_spiner.Form1.resources
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw_numbers_spiner.Properties.Resources.resources
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.csproj.GenerateResource.cache
@@ -67,7 +59,6 @@ E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.AssemblyInfoInputs.cache
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.AssemblyInfo.cs
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.csproj.CoreCompileInputs.cache
-E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.csproj.CopyComplete
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.dll
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\refint\Draw numbers spiner.dll
 E:\Draw numbers spiner\Draw numbers spiner\obj\Debug\net6.0-windows\Draw numbers spiner.pdb

@@ -1,0 +1,2 @@
+1 giải
+e.Graphics.DrawImage(number.number, 278 + (162 * px), 100, number.number.Width, number.number.Height);
