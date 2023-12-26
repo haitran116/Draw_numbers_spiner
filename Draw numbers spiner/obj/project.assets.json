@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Draw numbers spiner\\Draw numbers spiner\\Draw numbers spiner.csproj",
+      "projectUniqueName": "E:\\Draw numbers spiner-fix\\Draw numbers spiner\\Draw numbers spiner.csproj",
       "projectName": "Draw numbers spiner",
-      "projectPath": "E:\\Draw numbers spiner\\Draw numbers spiner\\Draw numbers spiner.csproj",
+      "projectPath": "E:\\Draw numbers spiner-fix\\Draw numbers spiner\\Draw numbers spiner.csproj",
       "packagesPath": "C:\\Users\\--Hai-Tran--\\.nuget\\packages\\",
-      "outputPath": "E:\\Draw numbers spiner\\Draw numbers spiner\\obj\\",
+      "outputPath": "E:\\Draw numbers spiner-fix\\Draw numbers spiner\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="EPPlus.Core">
+      <HintPath>..\..\CODE\lucky-draw-23-9-DF\lucky-draw-23-9-DF\luckydraw_df\luckydraw_v2\bin\Debug\net6.0-windows\EPPlus.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Media;
 
 namespace Draw_numbers_spiner
@@ -19,6 +20,12 @@ namespace Draw_numbers_spiner
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
 
+            GetData getData = new GetData();
+            list_people = getData.get_data();
+
+            label1.Hide();
+
+            //MessageBox.Show(list_people[0].name);
 
             timer_playing.Start();
         }
@@ -29,6 +36,8 @@ namespace Draw_numbers_spiner
 
 
         //-- biến toàn cục --
+        List<People> list_people = new List<People>();
+
         List<Numbers> list_numbers = new List<Numbers>();
         List<Firework> fireworks_list = new List<Firework>();
 
@@ -47,7 +56,7 @@ namespace Draw_numbers_spiner
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (list_numbers != null)
+            if (list_numbers.Count > 0)
             {
                 int px = 0;
                 foreach (Numbers number in list_numbers.ToList())
@@ -60,7 +69,7 @@ namespace Draw_numbers_spiner
                 Debug.WriteLine("Vẽ số");
             }
 
-            if (fireworks_list != null)
+            if (fireworks_list.Count > 0)
             {
                 foreach (Firework newFirework in fireworks_list.ToList())
                 {
@@ -70,7 +79,64 @@ namespace Draw_numbers_spiner
                     }
                     Debug.WriteLine("Vẽ pháo hoa");
                 }
+
+                draw_text_profile(e);
             }
+
+
+        }
+
+        private void draw_text_profile(PaintEventArgs e)
+        {
+            // Tạo một đối tượng Graphics để vẽ
+            Graphics g = e.Graphics;
+
+            // Tạo Font cho văn bản
+            Font font = new Font("UTM HelvetIns", 41, FontStyle.Regular, GraphicsUnit.Point);
+
+            // lấy text của lable họ tên
+            string text = "Chúc mừng - Trần Mạnh Hải";
+            Color[] textColor = { Color.Red, Color.DarkMagenta };
+
+            // Màu viền và độ dày của viền
+            Color strokeColor = Color.White;
+            int strokeWidth = 9;
+
+            // Tính toán kích thước và vị trí cho văn bản
+            SizeF textSize = g.MeasureString(text, label1.Font);
+
+            //int hovaten_x = (this.Width - (lable_hovaten.Width + 12)) / 2;
+            //int hovaten_y = lable_hovaten.Location.Y;
+
+            int hovaten_x = (this.Width - (int)textSize.Width) / 2;
+            int hovaten_y = label1.Location.Y;
+
+            //hovaten_x = new Random().Next(0, 1360);
+            //hovaten_y = new Random().Next(0, 700);
+
+            // Tạo một hình chữ nhật cho văn bản
+            Rectangle textRect = new Rectangle(hovaten_x, hovaten_y, this.Width, label1.Height);
+
+            // Tạo một đường viền (outline) cho văn bản bằng cách tạo một GraphicsPath
+            GraphicsPath path = new GraphicsPath();
+            path.AddString(text, font.FontFamily, (int)font.Style, font.Size, textRect, StringFormat.GenericDefault);
+
+            // Tạo một Pen cho viền
+            using (Pen strokePen = new Pen(strokeColor, strokeWidth))
+            {
+                strokePen.LineJoin = LineJoin.Round; // Điều này giúp viền trông mượt mà hơn
+
+                // Bật tính năng chống răng cưa
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Vẽ các đoạn đường xung quanh văn bản để tạo viền
+                g.DrawPath(strokePen, path);
+            }
+
+            // Vẽ văn bản bên trên đường viền
+            g.FillPath(new SolidBrush(textColor[new Random().Next(0, 2)]), path);
+
+            Debug.WriteLine("Vẽ tên người trúng");
         }
 
         private void timer_playing_Tick(object sender, EventArgs e)
@@ -82,7 +148,7 @@ namespace Draw_numbers_spiner
                     list_numbers = creats_number_spiner();
                 }
 
-                roll_wait(list_numbers);          
+                roll_wait(list_numbers);
             }
 
             if (click_quay == true)
@@ -98,7 +164,7 @@ namespace Draw_numbers_spiner
 
             if (click_tiep == true)
             {
-                if(list_numbers.Count == 0)
+                if (list_numbers.Count == 0)
                 {
                     list_numbers = creats_number_spiner();
                 }
@@ -108,7 +174,7 @@ namespace Draw_numbers_spiner
             // giải nhất
             if (quay_giai_nao == 1)
             {
-                
+
             }
 
         }
@@ -240,7 +306,7 @@ namespace Draw_numbers_spiner
                         fireworks_list.Remove(firework);
                     }
                 }
-                
+
                 this.Invalidate();
             }
         }
